@@ -1,10 +1,14 @@
 # Logical partitions (A/B, dynamic)
-system        /system        auto    ro                                     wait,logical,slotselect
-vendor        /vendor        auto    ro                                     wait,logical,slotselect
-product       /product       auto    ro                                     wait,logical,slotselect
-odm           /odm           auto    ro                                     wait,logical,slotselect
+system        /system        auto    ro    wait,logical,slotselect
+system_ext   /system_ext    auto    ro    wait,logical,slotselect
+vendor        /vendor        auto    ro    wait,logical,slotselect
+vendor_dlkm   /vendor_dlkm  auto    ro    wait,logical,slotselect
+product       /product       auto    ro    wait,logical,slotselect
+odm           /odm           auto    ro    wait,logical,slotselect
+odm_dlkm      /odm_dlkm     auto    ro    wait,logical,slotselect
+system_dlkm   /system_dlkm  auto    ro    wait,logical,slotselect
 
-# OPlus logical extensions (safe to include)
+# OPlus logical extensions
 my_product        /my_product        auto    ro    wait,logical,slotselect
 my_engineering   /my_engineering   auto    ro    wait,logical,slotselect
 my_company       /my_company        auto    ro    wait,logical,slotselect
@@ -16,16 +20,16 @@ my_preload       /my_preload        auto    ro    wait,logical,slotselect
 my_bigball       /my_bigball        auto    ro    wait,logical,slotselect
 my_manifest      /my_manifest       auto    ro    wait,logical,slotselect
 
-# Data (FBE)
-userdata      /data          f2fs    noatime,nosuid,nodev,discard,inlinecrypt \
+# Data (FBE, ICE)
+userdata  /data  f2fs  noatime,nosuid,nodev,discard,inlinecrypt \
     wait,check,formattable,fileencryption=ice,quota,reservedsize=128M,metadata_coldboot
 
-# Metadata (FBE)
-metadata      /metadata      f2fs    noatime,nosuid,nodev                   wait,check
+# Metadata (required for FBE)
+metadata  /metadata  f2fs  noatime,nosuid,nodev  wait,check
 
-# Misc (boot control)
-misc          /misc          emmc    defaults                               wait
+# Boot control
+misc  /misc  emmc  defaults  wait
 
-# External storage (optional but useful)
-external_sd   /external_sd   vfat    defaults                               wait
-usb_otg       /usb_otg       vfat    defaults                               wait
+# External storage
+external_sd  /external_sd  vfat  defaults  wait
+usb_otg      /usb_otg      vfat  defaults  wait
