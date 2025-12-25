@@ -47,6 +47,7 @@ BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 
 TARGET_FORCE_PREBUILT_KERNEL := true
 TARGET_PREBUILT_KERNEL := device/oplus/ossi/prebuilt/Image.lz4
+TARGET_PREBUILT_DTB := device/oplus/ossi/prebuilt/dtb.img
 
 # vendor_boot / recovery handling
 BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := true
